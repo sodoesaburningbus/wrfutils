@@ -40,5 +40,8 @@ except:
 if (source == 'gfs'):
     downloaders.gfs_download(start_date, end_date, interval, save_dir)
 
+elif (source == 'hrrr'):
+    downloaders.hrrr_download(start_date, end_date, interval, save_dir)
+
 else:
     raise Exception(f'Source "{source}" is not supported at this time. See script header for supported data sources.')
