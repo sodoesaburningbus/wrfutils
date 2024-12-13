@@ -14,7 +14,8 @@
 ### Dec. 2024
 ###
 ### Currently supports
-### GFS
+### GFS - AWS archive ~2021 onward
+### HRRR - AWS archive ~2014 onward
 
 # Import modules
 from datetime import datetime

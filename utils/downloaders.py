@@ -24,8 +24,16 @@ def gfs_download(sdate, edate, interval, sdir):
         try:
             ureq.urlretrieve(url, f'{sdir}/gfs.0p25.{date.strftime("%Y%m%d_%H%MUTC")}')
         except:
-            print(f'WARNING: file for {date.strftime("%-%m-%d %H UTC")} was unable to be downloaded. See URL below.')
+            print('-------------------------------------------------')
+            print(f'WARNING: file for {date.strftime("%-%m-%d %H UTC")} was unable to be downloaded. See URL below. Trying other format.')
             print(url)
+
+            try:
+                url = f'https://noaa-gfs-bdp-pds.s3.amazonaws.com/gfs.{date.strftime("%Y%m%d")}/{date.hour:02d}/atmos/gfs.t{date.hour:02d}z.pgrb2.0p25.f000'
+                ureq.urlretrieve(url, f'{sdir}/gfs.0p25.{date.strftime("%Y%m%d_%H%MUTC")}')
+            except:
+                print(f'Other format failed. See URL below.')
+                print(url)
 
         # Update the date
         date = date+timedelta(hours=interval)
@@ -49,7 +57,6 @@ def hrrr_download(sdate, edate, interval, sdir):
     while date < edate:
         
         # Download the file
-        # https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20190102/conus/hrrr.t00z.wrfprsf00.grib2
         url = f'https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.{date.strftime("%Y%m%d")}/conus/hrrr.t{date.hour:02d}z.wrfprsf00.grib2'
         try:
             ureq.urlretrieve(url, f'{sdir}/hrrr.wrfprs.{date.strftime("%Y%m%d_%H%MUTC")}')
