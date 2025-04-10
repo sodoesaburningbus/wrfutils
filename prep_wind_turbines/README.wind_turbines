@@ -1,0 +1,8 @@
+This directory contains the files necessary to prepare
+wind turbine experiments using the WRF model.
+
+Note that manufacturer specficiations are recommended for such experiments. Due to the variety
+of turbines available, it is left to the user to find their own copies of the specificiations.
+Additionally, only the turbine locations for the US are included herein.
+
+~Christopher Phillips
