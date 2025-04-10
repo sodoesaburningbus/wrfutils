@@ -1,0 +1,18 @@
+This directory contains some basic code for prepping WRF simulations
+and processing inputs and outputs.
+
+Some specifics:
+
+- display_grid_wps.py - Creates a plot of the WRF grid from the namelist.wps (see code for running instructions)
+
+- download_inputs.py - Downloads GFS or HRRR files for use with WRF (see code for running instructions)
+
+- modify_wrf_input.py - Example of how to modify a WRF input file
+
+- wrf_maps.py - Example of how to plot variables from a wrfout file
+
+- input_header.txt - WRF input file header
+
+- output_header.txt - WRF output file header
+
+- run_python - A simple SLURM batch script
