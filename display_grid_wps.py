@@ -64,8 +64,8 @@ else:
 xc, yc = wrf_proj.transform_point(lonc, latc, pc_proj)
 
 # Now compute the grid point locations
-x = list([(np.arange(0, e)-e/2)*d for e, d in zip(xe, dx)])
-y = list([(np.arange(0, e)-e/2)*d for e, d in zip(ye, dy)])
+x = list([(np.arange(0, e)-e/2)*d+xc for e, d in zip(xe, dx)])
+y = list([(np.arange(0, e)-e/2)*d+yc for e, d in zip(ye, dy)])
 
 # Mesh the grid
 xg = []

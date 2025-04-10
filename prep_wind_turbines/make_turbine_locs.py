@@ -12,7 +12,7 @@
 ##### START OPTIONS #####
 
 # Wind farms to include
-farms = ['Wildhorse Mountain Wind Facility']
+farms = ['Seiling', 'Seiling 2']
 
 # Location to save the wind turbine location file
 spath = 'windturbines.txt'

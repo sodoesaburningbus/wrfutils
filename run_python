@@ -1,0 +1,20 @@
+#!/bin/bash
+# Job name:
+#SBATCH --job-name=Mapping
+#
+# Account:
+#SBATCH --account=cphill19
+#
+# Partition:
+#SBATCH --partition=Met430
+#
+# Job memory (Mb)
+#SBATCH --mem=4G
+#
+# Number of procesors
+#SBATCH --ntasks=1
+
+# -------- Job Commands ------- #
+
+export ENV="/jupyterhq/miniconda3/envs/main/"
+$ENV/bin/python modify_wrf_input.py
