@@ -41,6 +41,9 @@ except:
 if (source == 'gfs'):
     downloaders.gfs_download(start_date, end_date, interval, save_dir)
 
+elif (source == 'gfs_f'):
+    downloaders.gfsf_download(start_date, end_date, interval, save_dir)
+
 elif (source == 'hrrr'):
     downloaders.hrrr_download(start_date, end_date, interval, save_dir)
 
