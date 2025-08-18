@@ -16,6 +16,7 @@
 ### Currently supports
 ### GFS - AWS archive ~2021 onward
 ### HRRR - AWS archive ~2014 onward
+### NAM - AWS archive ~2021 onward
 
 # Import modules
 from datetime import datetime
@@ -46,6 +47,15 @@ elif (source == 'gfs_f'):
 
 elif (source == 'hrrr'):
     downloaders.hrrr_download(start_date, end_date, interval, save_dir)
+
+elif (source == 'hrrr_f'):
+    downloaders.hrrrf_download(start_date, end_date, interval, save_dir)
+
+elif (source == 'nam'):
+    downloaders.nam_download(start_date, end_date, interval, save_dir)
+
+elif (source == 'nam_f'):
+    downloaders.namf_download(start_date, end_date, interval, save_dir)
 
 else:
     raise Exception(f'Source "{source}" is not supported at this time. See script header for supported data sources.')
