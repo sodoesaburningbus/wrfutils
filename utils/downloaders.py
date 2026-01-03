@@ -7,13 +7,13 @@
 from datetime import timedelta
 import urllib.request as ureq
 
-### GFS analysis downloader
+### GFS analysis downloader for AWS source
 ### Inputs:
 ###  sdate, python datetime object, the first date to download
 ###  edate, python datetime object, the last date to download
 ###  interval, int, the interval between analysis times in hours
 ###  sdir, string , directory to which to save the data.
-def gfs_download(sdate, edate, interval, sdir):
+def gfs_download_aws(sdate, edate, interval, sdir):
     
     # Download the files
     date = sdate
@@ -34,6 +34,36 @@ def gfs_download(sdate, edate, interval, sdir):
             except:
                 print(f'Other format failed. See URL below.')
                 print(url)
+
+        # Update the date
+        date = date+timedelta(hours=interval)
+
+        # Check that interval is positive
+        if (date < sdate):
+            raise Exception('Date is counting down. Check that interval is positive.')
+
+    return
+
+### GFS analysis downloader for NCEP data
+### Inputs:
+###  sdate, python datetime object, the first date to download
+###  edate, python datetime object, the last date to download
+###  interval, int, the interval between analysis times in hours
+###  sdir, string , directory to which to save the data.
+def gfs_download_ncep(sdate, edate, interval, sdir):
+    
+    # Download the files
+    date = sdate
+    while date < edate:
+        
+        # Download the file
+        url = f'https://osdf-director.osg-htc.org/ncar/gdex/d084001/{date.year}/{date.strftime("%Y%m%d")}/gfs.0p25.{date.strftime("%Y%m%d%H")}.f000.grib2'
+        try:
+            ureq.urlretrieve(url, f'{sdir}/gfs.0p25.{date.strftime("%Y%m%d_%H%MUTC")}')
+        except:
+            print('-------------------------------------------------')
+            print(f'WARNING: file for {date.strftime("%-%m-%d %H UTC")} was unable to be downloaded. See URL below.')
+            print(url)
 
         # Update the date
         date = date+timedelta(hours=interval)

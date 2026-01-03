@@ -39,8 +39,11 @@ except:
     pass
 
 # Call the appropriate downloader
-if (source == 'gfs'):
-    downloaders.gfs_download(start_date, end_date, interval, save_dir)
+if (source == 'gfs-aws'):
+    downloaders.gfs_download_aws(start_date, end_date, interval, save_dir)
+
+elif (source == 'gfs-ncep')
+    downloaders.gfs_download_ncep(start_date, end_date, interval, save_dir)
 
 elif (source == 'gfs_f'):
     downloaders.gfsf_download(start_date, end_date, interval, save_dir)
