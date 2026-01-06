@@ -74,13 +74,45 @@ def gfs_download_ncep(sdate, edate, interval, sdir):
 
     return
 
-### GFS forecast downloader
+### GFS forecast downloader for NCEP data
 ### Inputs:
 ###  sdate, python datetime object, the first date to download
 ###  edate, python datetime object, the last date to download
 ###  interval, int, the interval between analysis times in hours
 ###  sdir, string , directory to which to save the data.
-def gfsf_download(sdate, edate, interval, sdir):
+def gfsf_download_ncep(sdate, edate, interval, sdir):
+    
+    # Download the files
+    date = sdate
+    while date < edate:
+    
+        fhour = int((date-sdate).total_seconds()/3600)
+        
+        # Download the file
+        url = f'https://osdf-director.osg-htc.org/ncar/gdex/d084001/{sdate.year}/{sdate.strftime("%Y%m%d")}/gfs.0p25.{sdate.strftime("%Y%m%d%H")}.f{fhour:03d}.grib2'
+        try:
+            ureq.urlretrieve(url, f'{sdir}/gfs.0p25.{date.strftime("%Y%m%d_%H%MUTC")}')
+        except:
+            print('-------------------------------------------------')
+            print(f'WARNING: file for {date.strftime("%-%m-%d %H UTC")} was unable to be downloaded. See URL below.')
+            print(url)
+
+        # Update the date
+        date = date+timedelta(hours=interval)
+
+        # Check that interval is positive
+        if (date < sdate):
+            raise Exception('Date is counting down. Check that interval is positive.')
+
+    return
+
+### GFS forecast downloader for AWS data
+### Inputs:
+###  sdate, python datetime object, the first date to download
+###  edate, python datetime object, the last date to download
+###  interval, int, the interval between analysis times in hours
+###  sdir, string , directory to which to save the data.
+def gfsf_download_aws(sdate, edate, interval, sdir):
 
     # Download the files
     date = sdate

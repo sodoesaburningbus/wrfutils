@@ -72,20 +72,20 @@ for i in range(ngrids):
        y.append((np.arange(0, ye[i])-ye[i]/2)*dy[i]+yc)
    
    else:
-       x.append((np.arange(0, xe[i])-xe[i]/2)*dx[i]+xs[i]*dx[i-1])
-       y.append((np.arange(0, ye[i])-ye[i]/2)*dy[i]+ys[i]*dy[i-1])
+       x.append((np.arange(0, xe[i]))*dx[i]+x[-1][xs[i]-1])
+       y.append((np.arange(0, ye[i]))*dy[i]+y[-1][ys[i]-1])
 
 # Now compute the grid point locations
 #x = list([(np.arange(0, e)-e/2)*d+xc for e, d in zip(xe, dx)])
 #y = list([(np.arange(0, e)-e/2)*d+yc for e, d in zip(ye, dy)])
 
 # Mesh the grid
-xg = []
-yg = []
-for xi, yi in zip(x, y):
-    dummy_x, dummy_y = np.meshgrid(xi, yi)
-    xg.append(dummy_x)
-    yg.append(dummy_y)
+#xg = []
+#yg = []
+#for xi, yi in zip(x, y):
+#    dummy_x, dummy_y = np.meshgrid(xi, yi)
+#    xg.append(dummy_x)
+#    yg.append(dummy_y)
 
 # Make the plot
 fig, ax = pp.subplots(subplot_kw={'projection':wrf_proj}, figsize=(8,8), dpi=100)

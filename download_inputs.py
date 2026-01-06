@@ -42,11 +42,14 @@ except:
 if (source == 'gfs-aws'):
     downloaders.gfs_download_aws(start_date, end_date, interval, save_dir)
 
-elif (source == 'gfs-ncep')
+elif (source == 'gfs-ncep'):
     downloaders.gfs_download_ncep(start_date, end_date, interval, save_dir)
+    
+elif (source == 'gfs-ncep-f'):
+    downloaders.gfsf_download_ncep(start_date, end_date, interval, save_dir)
 
-elif (source == 'gfs_f'):
-    downloaders.gfsf_download(start_date, end_date, interval, save_dir)
+elif (source == 'gfs-aws-f'):
+    downloaders.gfsf_download_aws(start_date, end_date, interval, save_dir)
 
 elif (source == 'hrrr'):
     downloaders.hrrr_download(start_date, end_date, interval, save_dir)
