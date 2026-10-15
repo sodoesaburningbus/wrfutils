@@ -59,6 +59,9 @@ elif (source == 'hrrr_f'):
 
 elif (source == 'nam'):
     downloaders.nam_download(start_date, end_date, interval, save_dir)
+    
+elif (source == 'nam-ncep-f'):
+    downloaders.namf_download_ncep(start_date, end_date, interval, save_dir)
 
 elif (source == 'nam_f'):
     downloaders.namf_download(start_date, end_date, interval, save_dir)

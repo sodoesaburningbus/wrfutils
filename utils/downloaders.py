@@ -240,6 +240,38 @@ def namf_download(sdate, edate, interval, sdir):
 
     return
 
+### NAM forecast downloader for NCEP data
+### Inputs:
+###  sdate, python datetime object, the first date to download
+###  edate, python datetime object, the last date to download
+###  interval, int, the interval between analysis times in hours
+###  sdir, string , directory to which to save the data.
+def namf_download_ncep(sdate, edate, interval, sdir):
+    
+    # Download the files
+    date = sdate
+    while date < edate:
+    
+        fhour = int((date-sdate).total_seconds()/3600)
+        
+        # Download the file
+        url = f'https://www.ncei.noaa.gov/oa/prod-model/north-american-mesoscale-model/access/forecast/{sdate.strftime("%Y%m")}/{sdate.strftime("%Y%m%d")}/nam_218_{sdate.strftime("%Y%m%d_%H00")}_{fhour:03d}.grb2'
+        try:
+            ureq.urlretrieve(url, f'{sdir}/nam.12km.{date.strftime("%Y%m%d_%H%MUTC")}')
+        except:
+            print('-------------------------------------------------')
+            print(f'WARNING: file for {date.strftime("%-%m-%d %H UTC")} was unable to be downloaded. See URL below.')
+            print(url)
+
+        # Update the date
+        date = date+timedelta(hours=interval)
+
+        # Check that interval is positive
+        if (date < sdate):
+            raise Exception('Date is counting down. Check that interval is positive.')
+
+    return
+
 ### HRRR forecast downloader
 ### Inputs:
 ###  sdate, python datetime object, the first date to download

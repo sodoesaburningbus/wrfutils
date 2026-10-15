@@ -47,9 +47,11 @@ gfiles = sorted(glob(file_path+'/geo_em*.nc'))
 
 # Loop over the grid files and make the figure
 for gi, gfile in enumerate(gfiles):
+
     fn = nc.Dataset(gfile)
     lons = fn.variables['XLONG_M'][0,:,:]
     lats = fn.variables['XLAT_M'][0,:,:]
+    fn.close()
 
     grid = patches.Rectangle(xy=[lons[0,0], lats[0,0]], width=lons[-1,-1]-lons[0,0], height=lats[-1,-1]-lats[0,0],
                              facecolor='none', edgecolor='firebrick', linewidth=2.0, transform=pc_proj)
